@@ -1,4 +1,5 @@
-import { Component, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { SharedLibService } from 'shared-lib';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit {
   @ViewChild('mfe2ContainerTodoList', { read: ViewContainerRef, static: true })
   vc2!: ViewContainerRef;
 
-  // constructor(private vc: ViewContainerRef) {}
+  constructor(private sharedLibService: SharedLibService) {}
 
   async ngOnInit() {
     const m1 = await import('mfe1-app/TodoListComponent');
@@ -20,11 +21,11 @@ export class AppComponent implements OnInit {
     const comp1 = m1.TodoListComponent;
     const comp2 = m2.TodoDetailComponent;
     
-    const compRef1 = this.vc1.createComponent(comp1) as ComponentRef<InstanceType<typeof comp1>>;
-    const compRef2 = this.vc1.createComponent(comp2) as ComponentRef<InstanceType<typeof comp1>>;
-    // Listen to Output Event
-    compRef1.instance.dataFromMfe1.subscribe((value: string) => {
-      compRef2.instance.detail = value;
+    this.vc1.createComponent(comp1);
+    this.vc2.createComponent(comp2); 
+    
+    this.sharedLibService.data$.subscribe(d => {
+      console.log(d);
     });
   }
 }

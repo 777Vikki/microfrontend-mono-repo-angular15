@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SharedLibService } from 'shared-lib';
 
 @Component({
   selector: 'app-todo-list',
@@ -7,14 +8,13 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   providers: [],
 })
 export class TodoListComponent implements OnInit{
-  @Output() dataFromMfe1 = new EventEmitter<string>();
-  constructor() { }
+  constructor(private sharedLibService: SharedLibService) {}
 
   ngOnInit(): void {
-    
+
   }
 
   sendData() {
-    this.dataFromMfe1.emit('Hello from MFE!');
+    this.sharedLibService.sendMessage('MFE trigered');
   }
 }
