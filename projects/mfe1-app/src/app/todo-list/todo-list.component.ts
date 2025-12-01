@@ -1,19 +1,25 @@
-import { Component } from '@angular/core';
-import { UserDetailService } from '../core/services/user-detail.service';
+import { Component, OnInit } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
-  providers: [UserDetailService],
+  providers: [],
 })
-export class TodoListComponent {
-  constructor(private userDetailService: UserDetailService) { }
+export class TodoListComponent implements OnInit{
+  constructor() { }
 
   ngOnInit(): void {
-    this.userDetailService.getUserDetail()
-      .subscribe(d => {
-        console.log(d);
-      });
+    console.log('Todo List');
+    const event = new CustomEvent('header', {
+      detail: {
+        name: 'Todo List',
+      }
+    });
+    dispatchEvent(event);
+
+    const eventTitle = new CustomEvent('headerTitle', {detail: {title: 'Todo List Title'}});
+    dispatchEvent(eventTitle);
   }
 }
