@@ -16,4 +16,6 @@ export class TodoDetailComponent {
   get detail() {
     return this._detail;
   }
+
+  // ngOnChanges is triggered ONLY when Angular sets @Input, not when we assign to the property manually.
 }
