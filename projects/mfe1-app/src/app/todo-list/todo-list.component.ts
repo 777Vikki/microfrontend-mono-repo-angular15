@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,18 +7,14 @@ import { fromEvent } from 'rxjs';
   providers: [],
 })
 export class TodoListComponent implements OnInit{
+  @Output() dataFromMfe1 = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
-    console.log('Todo List');
-    const event = new CustomEvent('header', {
-      detail: {
-        name: 'Todo List',
-      }
-    });
-    dispatchEvent(event);
+    
+  }
 
-    const eventTitle = new CustomEvent('headerTitle', {detail: {title: 'Todo List Title'}});
-    dispatchEvent(eventTitle);
+  sendData() {
+    this.dataFromMfe1.emit('Hello from MFE!');
   }
 }

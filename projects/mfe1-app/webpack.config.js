@@ -6,11 +6,11 @@ module.exports = withModuleFederationPlugin({
 
   exposes: {
     './TodoListModule': './projects/mfe1-app/src/app/todo-list/todo-list.module.ts',
+    './TodoListComponent': './projects/mfe1-app/src/app/todo-list/todo-list.component.ts',
   },
 
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
-     "shared-lib": { singleton: true, strictVersion: true }
   },
 
 });
