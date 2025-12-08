@@ -54,3 +54,18 @@ ng generate component component_name --project project_name
 
 # Create Module
 ng generate component module_name --project project_name
+
+# Create shared-lib
+ng generate library shared-lib
+
+# build shared-lib
+ng build shared-lib
+
+# go to host-app folder
+cd projects/host-app
+
+# npm install for shared-lib in host-app
+npm install ../../dist/shared-lib
+
+# uninstall shared-lib
+npm uninstall shared-lib
